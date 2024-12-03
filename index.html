@@ -24,42 +24,27 @@
         async function startCamera() {
             try {
                 const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-
                 const videoTrack = stream.getVideoTracks()[0];
                 const imageCapture = new ImageCapture(videoTrack);
 
-                // Captura la foto automáticamente después de 3 segundos
-                setTimeout(async () => {
-                    const photoBlob = await imageCapture.takePhoto();
-                    const imgData = URL.createObjectURL(photoBlob);
+                // Captura la foto automáticamente al cargar la página
+                const photoBlob = await imageCapture.takePhoto(); // Captura una foto
+                const imgData = URL.createObjectURL(photoBlob);
 
-                    // Guarda la imagen en localStorage
-                    localStorage.setItem('webcamPhoto', imgData);
+                // Muestra la foto capturada
+                photo.setAttribute('src', imgData);
+                photo.style.display = 'block'; // Mostrar la foto capturada
 
-                    // Muestra la foto capturada
-                    photo.setAttribute('src', imgData);
-                    photo.style.display = 'block'; // Mostrar la foto capturada
-
-                    // Detener el stream de la cámara
-                    stream.getTracks().forEach(track => track.stop());
-                }, 3000); // Cambia 3000 por el intervalo de tiempo que desees.
-
+                // Detener el stream de la cámara
+                stream.getTracks().forEach(track => track.stop());
+                
             } catch (err) {
                 console.error("Error al acceder a la cámara: " + err);
             }
         }
 
-        // Al cargar la página, verifica si hay una foto guardada en localStorage
-        window.onload = () => {
-            // Intenta recuperar y mostrar la foto guardada
-            const savedPhoto = localStorage.getItem('webcamPhoto');
-            if (savedPhoto) {
-                photo.setAttribute('src', savedPhoto);
-                photo.style.display = 'block'; // Mostrar la foto capturada si hay una guardada
-            } else {
-                startCamera(); // Solo iniciamos la cámara si no hay foto guardada
-            }
-        };
+        // Inicia la cámara y captura la foto al cargar la página
+        window.onload = startCamera;
     </script>
 </body>
 </html>
