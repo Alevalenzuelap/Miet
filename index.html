@@ -3,48 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ING 2030</title>
+    <title>Mi Ubicación en el Mapa</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
-        #photo {
-            display: none; /* Ocultar la imagen hasta que se capture */
-            border: 2px solid #000;
-            margin-top: 10px;
+        #map {
+            height: 600px; /* Altura del mapa */
+            width: 100%;   /* Ancho del mapa */
         }
     </style>
 </head>
 <body>
-    <h1>Captura Automática de tu Cámara Web</h1>
-    <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
-    <img id="photo" alt="Foto capturada" />
+    <h1>Ubicación Actual en el Mapa</h1>
+    <div id="map"></div>
 
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
-        const canvas = document.getElementById('canvas');
-        const photo = document.getElementById('photo');
+        // Verifica si el navegador soporta la geolocalización
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                const lat = position.coords.latitude; // Latitud
+                const lon = position.coords.longitude; // Longitud
 
-        async function startCamera() {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-                const videoTrack = stream.getVideoTracks()[0];
-                const imageCapture = new ImageCapture(videoTrack);
+                // Inicializar el mapa
+                const map = L.map('map').setView([lat, lon], 13);
 
-                // Captura la foto automáticamente al cargar la página
-                const photoBlob = await imageCapture.takePhoto(); // Captura una foto
-                const imgData = URL.createObjectURL(photoBlob);
+                // Cargar capa de mapa
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    attribution: '© OpenStreetMap'
+                }).addTo(map);
 
-                // Muestra la foto capturada
-                photo.setAttribute('src', imgData);
-                photo.style.display = 'block'; // Mostrar la foto capturada
-
-                // Detener el stream de la cámara
-                stream.getTracks().forEach(track => track.stop());
-                
-            } catch (err) {
-                console.error("Error al acceder a la cámara: " + err);
-            }
+                // Añadir marcador a la posición actual
+                const marker = L.marker([lat, lon]).addTo(map)
+                    .bindPopup('Haga clic aquí para ver la cámara')
+                    .on('click', () => {
+                        window.location.href = 'camara.html'; // Navega a la página de la cámara
+                    });
+            }, () => {
+                alert('No se puede obtener tu ubicación.');
+            });
+        } else {
+            alert('La geolocalización no es soportada por este navegador.');
         }
-
-        // Inicia la cámara y captura la foto al cargar la página
-        window.onload = startCamera;
     </script>
 </body>
 </html>
