@@ -3,36 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceso a la Cámara</title>
+    <title>Captura de Cámara</title>
+    <style>
+        #photo {
+            display: none; /* Ocultar la imagen hasta que se capture */
+            border: 2px solid #000;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Acceso a tu Cámara Web</h1>
+    <h1>Captura de tu Cámara Web</h1>
     <video id="video" width="640" height="480" autoplay></video>
-    <button id="startButton">Iniciar Cámara</button>
-    <button id="stopButton">Detener Cámara</button>
+    <button id="captureButton">Capturar Foto</button>
+    <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
+    <img id="photo" alt="Foto capturada" />
 
     <script>
         const video = document.getElementById('video');
-        const startButton = document.getElementById('startButton');
-        const stopButton = document.getElementById('stopButton');
+        const captureButton = document.getElementById('captureButton');
+        const canvas = document.getElementById('canvas');
+        const photo = document.getElementById('photo');
         let stream;
 
-        startButton.addEventListener('click', async () => {
+        async function startCamera() {
             try {
                 stream = await navigator.mediaDevices.getUserMedia({ video: true });
                 video.srcObject = stream;
             } catch (err) {
                 console.error("Error al acceder a la cámara: " + err);
             }
+        }
+
+        captureButton.addEventListener('click', () => {
+            const context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            const imgData = canvas.toDataURL('image/png');
+            photo.setAttribute('src', imgData);
+            photo.style.display = 'block'; // Mostrar la foto capturada
         });
 
-        stopButton.addEventListener('click', () => {
-            if (stream) {
-                // Detener el stream de la cámara
-                stream.getTracks().forEach(track => track.stop());
-                video.srcObject = null;
-            }
-        });
+        // Inicia la cámara al cargar la página
+        window.onload = startCamera;
+
+        // Detener la cámara si se desea (opcional)
+        // Puedes añadir un botón "Detener Cámara" similar al de antes si es necesario
     </script>
 </body>
 </html>
