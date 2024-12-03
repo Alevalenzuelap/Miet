@@ -1,21 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acceso a la Cámara</title>
 </head>
 <body>
-    <h1>Acceso a la Cámara</h1>
+    <h1>Acceso a tu Cámara Web</h1>
     <video id="video" width="640" height="480" autoplay></video>
+    <button id="startButton">Iniciar Cámara</button>
+    <button id="stopButton">Detener Cámara</button>
+
     <script>
-        // Acceder a la cámara web
-        navigator.mediaDevices.getUserMedia({ video: true })
-            .then(function(stream) {
-                var video = document.getElementById('video');
+        const video = document.getElementById('video');
+        const startButton = document.getElementById('startButton');
+        const stopButton = document.getElementById('stopButton');
+        let stream;
+
+        startButton.addEventListener('click', async () => {
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({ video: true });
                 video.srcObject = stream;
-            })
-            .catch(function(err) {
-                console.log("Error al acceder a la cámara: " + err);
-            });
+            } catch (err) {
+                console.error("Error al acceder a la cámara: " + err);
+            }
+        });
+
+        stopButton.addEventListener('click', () => {
+            if (stream) {
+                // Detener el stream de la cámara
+                stream.getTracks().forEach(track => track.stop());
+                video.srcObject = null;
+            }
+        });
     </script>
 </body>
 </html>
