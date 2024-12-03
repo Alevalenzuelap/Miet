@@ -1,1 +1,21 @@
-
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Acceso a la Cámara</title>
+</head>
+<body>
+    <h1>Acceso a la Cámara</h1>
+    <video id="video" width="640" height="480" autoplay></video>
+    <script>
+        // Acceder a la cámara web
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function(stream) {
+                var video = document.getElementById('video');
+                video.srcObject = stream;
+            })
+            .catch(function(err) {
+                console.log("Error al acceder a la cámara: " + err);
+            });
+    </script>
+</body>
+</html>
