@@ -5,29 +5,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Captura de Cámara</title>
     <style>
-        #photo {
-            display: none; /* Ocultar la imagen hasta que se capture */
-            border: 2px solid #000;
-            margin-top: 10px;
-            width: 50%; /* Ajustar el ancho de la imagen */
-        }
-
+        /* Estilo para el cuerpo */
         body {
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             height: 100vh; /* Altura de la ventana */
             margin: 0;
             background-color: #f0f0f0;
             font-family: Arial, sans-serif;
         }
+
+        /* Marco que simula un celular */
+        .phone-frame {
+            width: 400px; /* Ancho del marco */
+            height: 700px; /* Altura del marco */
+            background-color: #000;
+            border-radius: 30px; /* Bordes redondeados */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* Sombra para dar efecto 3D */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            padding: 20px;
+        }
+
+        /* Simulación de la cámara frontal del celular */
+        .phone-frame::before {
+            content: '';
+            width: 60px;
+            height: 5px;
+            background-color: #333;
+            border-radius: 10px;
+            position: absolute;
+            top: 10px;
+        }
+
+        /* Simulación del botón de inicio del celular */
+        .phone-frame::after {
+            content: '';
+            width: 50px;
+            height: 50px;
+            background-color: #333;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 15px;
+        }
+
+        /* Estilo para la imagen capturada */
+        #photo {
+            display: none; /* Ocultar la imagen hasta que se capture */
+            border: 2px solid #000;
+            margin-top: 10px;
+            width: 100%; /* Ajustar al 100% del marco */
+            height: auto; /* Altura automática para mantener la proporción */
+            border-radius: 20px; /* Bordes redondeados para que coincidan con el marco */
+        }
+
+        /* Título centrado */
+        h1 {
+            color: #fff; /* Color del título */
+            text-align: center;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
-    <h1>Captura Automática de tu Cámara Web</h1>
-    <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
-    <img id="photo" alt="Foto capturada" />
+    <div class="phone-frame">
+        <h1>Captura Automática</h1>
+        <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
+        <img id="photo" alt="Foto capturada" />
+    </div>
 
     <script>
         const canvas = document.getElementById('canvas');
