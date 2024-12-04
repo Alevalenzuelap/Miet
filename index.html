@@ -33,8 +33,16 @@
                     attribution: '© OpenStreetMap'
                 }).addTo(map);
 
-                // Añadir marcador a la posición actual
-                const marker = L.marker([lat, lon]).addTo(map)
+                // Crear un icono personalizado
+                const busIcon = L.icon({
+                    iconUrl: 'https://img.icons8.com/?size=100&id=9351&format=png&color=ffbf00', // URL del icono (puedes cambiarlo)
+                    iconSize: [40, 40], // Tamaño del icono
+                    iconAnchor: [20, 40], // Punto del icono que se posicionará en la coordenada
+                    popupAnchor: [0, -40] // Punto desde donde se abrirá el popup
+                });
+
+                // Añadir marcador con el icono personalizado
+                const marker = L.marker([lat, lon], { icon: busIcon }).addTo(map)
                     .bindPopup('Haga clic aquí para ver la cámara')
                     .on('click', () => {
                         window.location.href = 'camara.html'; // Navega a la página de la cámara
