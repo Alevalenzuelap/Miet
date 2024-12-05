@@ -3,68 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú principal</title>
+    <title>Menú Principal</title>
     <style>
-       body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
+        /* Estilo general del cuerpo */
+        body {
+            font-family: Arial, sans-serif; 
+            display: flex; 
+            justify-content: center; 
             align-items: center;
-            height: 100vh;
+            height: 100vh; 
             margin: 0;
             background-color: #f0f0f0;
         }
 
-         /* Marco que simula un celular */
+        /* Marco que simula un celular */
         .phone-frame {
             width: 400px; /* Ancho del marco */
             height: 700px; /* Altura del marco */
-            background-color: #f0f0f0;
+            background-color: #000;
             border-radius: 30px; /* Bordes redondeados */
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* Sombra para dar efecto 3D */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
             display: flex;
             flex-direction: column;
             align-items: center;
-            position: relative;
             padding: 20px;
+            position: relative; 
         }
-        
-        /* Simulación de la cámara frontal del celular */
-        .phone-frame::before {
+
+        /* Simulación de la cámara frontal y botón de inicio del celular */
+        .phone-frame::before, .phone-frame::after {
             content: '';
-            width: 60px;
-            height: 5px;
+            position: absolute;
             background-color: #333;
             border-radius: 10px;
-            position: absolute;
+        }
+
+        .phone-frame::before {
+            width: 60px;
+            height: 5px;
             top: 10px;
         }
 
-            /* Simulación del botón de inicio del celular */
         .phone-frame::after {
-            content: '';
             width: 50px;
             height: 50px;
-            background-color: #333;
             border-radius: 50%;
-            position: absolute;
             bottom: 15px;
-            
-        .bus-info {
-            color: #fff;
-            background-color: #4CAF50; /* Green background for button */
-            padding: 10px 15px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #FFF;
+            background-color: #4CAF50;
+            padding: 10px 20px;
             border-radius: 5px;
             display: block;
-            width: 90%; /* Responsive width */
+            width: 90%;
             text-align: center;
-            text-decoration: none;
             margin: 10px 0;
             font-size: 16px;
         }
 
         .info {
-            color: #f0f0f0;
+            color: #fff;
             text-align: center;
             font-size: 14px;
             margin-bottom: 10px;
@@ -76,39 +77,4 @@
     </style>
 </head>
 <body>
-    <div class="phone-frame">
-        <!-- MIET 2024 -->
-        <a href="location.html" class="bus-info">
-            <span class="bus-icon">🚌</span>
-            MIET 2024
-        </a>
-        <div class="info">
-            <p>- Tiempo de llegada: 5 minutos</p>
-            <p>- Disponibilidad asientos: 5</p>
-            <p>- Disponibilidad de pie: 10</p>
-        </div>
-
-        <!-- ING 2030 -->
-        <a href="location.html" class="bus-info">
-            <span class="bus-icon">🚌</span>
-            ING 2030
-        </a>
-        <div class="info">
-            <p>- Tiempo de llegada: 7 minutos</p>
-            <p>- Disponibilidad asientos: 8</p>
-            <p>- Disponibilidad de pie: 12</p>
-        </div>
-
-        <!-- LINEA 70 -->
-        <a href="location.html" class="bus-info">
-            <span class="bus-icon">🚌</span>
-            LINEA 70
-        </a>
-        <div class="info">
-            <p>- Tiempo de llegada: 10 minutos</p>
-            <p>- Disponibilidad asientos: 15</p>
-            <p>- Disponibilidad de pie: 15</p>
-        </div>
-    </div>
-</body>
-</html>
+    <div class="phone
