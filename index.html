@@ -5,69 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menú principal</title>
     <style>
-        /* Estilo para el cuerpo */
-        body {
+       body {
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh; /* Altura de la ventana */
+            height: 100vh;
             margin: 0;
             background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
         }
 
-        /* Marco que simula un celular */
         .phone-frame {
-            width: 400px; /* Ancho del marco */
-            height: 700px; /* Altura del marco */
+            width: 400px;
+            height: 700px; /* Fixed size as in camara.html and location.html */
             background-color: #000;
-            border-radius: 30px; /* Bordes redondeados */
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* Sombra para dar efecto 3D */
+            border-radius: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            box-sizing: border-box;
             display: flex;
             flex-direction: column;
             align-items: center;
-            position: relative;
-            padding: 20px;
+            overflow: auto; /* Enables scrolling if content overflows */
         }
 
-        /* Simulación de la cámara frontal del celular */
-        .phone-frame::before {
-            content: '';
-            width: 60px;
-            height: 5px;
-            background-color: #333;
-            border-radius: 10px;
-            position: absolute;
-            top: 10px;
-        }
-
-        /* Simulación del botón de inicio del celular */
-        .phone-frame::after {
-            content: '';
-            width: 50px;
-            height: 50px;
-            background-color: #333;
-            border-radius: 50%;
-            position: absolute;
-            bottom: 15px;
-        }
-
-        /* Estilo para la imagen capturada */
-        #photo {
-            display: none; /* Ocultar la imagen hasta que se capture */
-            border: 2px solid #000;
-            margin-top: 10px;
-            width: 100%; /* Ajustar al 100% del marco */
-            height: auto; /* Altura automática para mantener la proporción */
-            border-radius: 20px; /* Bordes redondeados para que coincidan con el marco */
-        }
-
-        /* Título centrado */
-        h1 {
-            color: #fff; /* Color del título */
+        .bus-info {
+            color: #fff;
+            background-color: #4CAF50; /* Green background for button */
+            padding: 10px 15px;
+            border-radius: 5px;
+            display: block;
+            width: 90%; /* Responsive width */
             text-align: center;
-            margin-bottom: 20px;
+            text-decoration: none;
+            margin: 10px 0;
+            font-size: 16px;
         }
+
+        .info {
+            color: #fff;
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .bus-icon {
+            margin-right: 10px;
+        }
+    </style>
     </style>
 </head>
 <body>
