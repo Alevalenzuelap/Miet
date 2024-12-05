@@ -3,122 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Ubicación en el Mapa</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <title>Mapa - Miet 2030</title>
     <style>
-        /* Estilo general del cuerpo */
         body {
-            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
             background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
         }
-
-        /* Marco que simula un celular */
         .phone-frame {
-            width: 400px; /* Ancho del marco */
-            height: 700px; /* Altura del marco */
-            background-color: #000;
-            border-radius: 30px; /* Bordes redondeados */
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* Sombra para dar efecto 3D */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
+            width: 350px;
+            height: 700px;
+            border: 15px solid black;
+            border-radius: 30px;
+            overflow: hidden;
             position: relative;
         }
-
-        /* Simulación de la cámara frontal del celular */
-        .phone-frame::before {
-            content: '';
-            width: 60px;
-            height: 5px;
-            background-color: #333;
-            border-radius: 10px;
-            position: absolute;
-            top: 10px;
-        }
-
-        /* Simulación del botón de inicio del celular */
-        .phone-frame::after {
-            content: '';
-            width: 50px;
-            height: 50px;
-            background-color: #333;
-            border-radius: 50%;
-            position: absolute;
-            bottom: 15px;
-        }
-
-        /* Contenedor del mapa dentro del marco */
         #map {
-            height: 100%; /* Altura del mapa */
-            width: 100%;  /* Ancho del mapa */
-            border-radius: 20px; /* Bordes redondeados para que coincidan con el marco */
-            overflow: hidden; /* Ocultar cualquier contenido que sobresalga */
-        }
-
-        /* Título centrado */
-        h1 {
-            color: #333;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        /* Estilo del popup del marcador */
-        .custom-popup {
-            text-align: center;
-            font-size: 12px;
-            color: black;
+            width: 100%;
+            height: 100%;
         }
     </style>
 </head>
 <body>
     <div class="phone-frame">
-        <h1>Transporte Bio Bio</h1> <!-- Título añadido aquí -->
-        <div id="map"></div>
-    </div>
-
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script>
-        // Verifica si el navegador soporta la geolocalización
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(position => {
-                const lat = position.coords.latitude; // Latitud
-                const lon = position.coords.longitude; // Longitud
-
-                // Inicializar el mapa
-                const map = L.map('map').setView([lat, lon], 13);
-
-                // Cargar capa de mapa
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 19,
-                    attribution: '© OpenStreetMap'
-                }).addTo(map);
-
-                // Crear un icono personalizado
-                const busIcon = L.icon({
-                    iconUrl: 'https://img.icons8.com/?size=100&id=9351&format=png&color=000000', // URL del icono
-                    iconSize: [40, 40], // Tamaño del icono
-                    iconAnchor: [20, 40], // Punto del icono que se posicionará en la coordenada
-                    popupAnchor: [0, -40] // Punto desde donde se abrirá el popup
-                });
-
-                // Añadir marcador con el icono personalizado
-                const marker = L.marker([lat, lon], { icon: busIcon }).addTo(map)
-                    .bindPopup(`<div class="custom-popup"><strong>MIET2030</strong><br>Haga clic aquí para ver la cámara</div>`)
-                    .on('click', () => {
-                        window.location.href = 'camara.html'; // Navega a la página de la cámara
-                    });
-            }, () => {
-                alert('No se puede obtener tu ubicación.');
+        <iframe 
+            id="map" 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.6533166997!2d-75.5705!3d6.2442!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMTQnMzguNyJOIDc1wrAzNCcxMy44Ilc!5e0!3m2!1ses!2sco!4v1234567890" 
+            frameborder="0" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy">
+        </iframe>
+        <script>
+            document.getElementById('map').addEventListener('click', function() {
+                window.location.href = 'camara.html';
             });
-        } else {
-            alert('La geolocalización no es soportada por este navegador.');
-        }
-    </script>
+        </script>
+    </div>
 </body>
 </html>
