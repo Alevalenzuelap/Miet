@@ -53,37 +53,36 @@
             text-align: center;
         }
 
-        ul {
-            width: 100%;
-            padding: 0;
-            list-style-type: none;
-            margin-top: 50px; /* Ajuste de posición */
-        }
-
-        li {
-            background-color: #ececec;
-            margin: 10px 0;
-            padding: 10px;
-            border-radius: 10px;
-            color: black;
+        .button {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            padding: 15px 32px;
             text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 20px 2px;
+            cursor: pointer;
+            border-radius: 4px;
         }
 
-        a {
-            text-decoration: none;
-            color: #333;
-            display: block;
+        .info {
+            color: #fff;
+            font-size: 16px;
+            text-align: center;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <div class="phone-frame">
-        <h1>Seleccione una opción</h1>
-        <ul>
-            <li><a href="location.html">🌍 Mi Ubicación en el Mapa</a></li>
-            <li><a href="camara.html">🚌 MIET 2030 - 10 asientos disponibles</a></li>
-            <li><a href="camara.html">📷 Vista de Cámara</a></li>
-        </ul>
+        <h1>MIET 2030 - 10 asientos disponibles</h1>
+        <button class="button">Ver disponibilidad</button>
+        <div class="info">
+            <p>- Tiempo de llegada: 5 minutos</p>
+            <p>- Disponibilidad asientos: 5</p>
+            <p>- Disponibilidad de pie: 10</p>
+        </div>
     </div>
 </body>
 </html>
