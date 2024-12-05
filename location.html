@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Ubicación en el Mapa</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .phone-frame {
+            width: 400px;
+            height: 700px;
+            background-color: #000;
+            border-radius: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .phone-frame::before, .phone-frame::after {
+            content: '';
+            position: absolute;
+            background-color: #333;
+            border-radius: 10px;
+        }
+
+        .phone-frame::before {
+            width: 60px;
+            height: 5px;
+            top: 10px;
+        }
+
+        .phone-frame::after {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            bottom: 15px;
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-frame">
+        <h1>Transporte Bio Bio</h1>
+        <div id="map"></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                const map = L.map('map').setView([lat, lon], 13);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    attribution: '© OpenStreetMap'
+                }).addTo(map);
+            }, () => {
+                alert('No se puede obtener tu ubicación.');
+            });
+        } else {
+            alert('La geolocalización no es soportada por este navegador.');
+        }
+    </script>
+</body>
+</html>
