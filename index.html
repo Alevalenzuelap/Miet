@@ -17,64 +17,71 @@
 
         .phone-frame {
             width: 400px;
-            height: 700px;
+            height: auto; /* Adjusted for automatic height */
             background-color: #000;
             border-radius: 30px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             padding: 20px;
-            position: relative;
+            box-sizing: border-box;
         }
 
-        .phone-frame::before, .phone-frame::after {
-            content: '';
-            position: absolute;
-            background-color: #333;
-            border-radius: 10px;
-        }
-
-        .phone-frame::before {
-            width: 60px;
-            height: 5px;
-            top: 10px;
-        }
-
-        .phone-frame::after {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            bottom: 15px;
-        }
-
-        h1, .info {
-            color: #fff;
-            text-align: center;
-            font-size: 16px;
-            margin-top: 20px;
-        }
-
-        a {
-            text-decoration: none;
+        .bus-info {
+            background-color: #4CAF50; /* Green background for button */
             color: #FFF;
-            background-color: #4CAF50;
-            padding: 10px 20px;
+            text-decoration: none;
+            padding: 10px 15px;
             border-radius: 5px;
             display: block;
-            width: 90%;
-            text-align: center;
             margin: 10px 0;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .info {
+            color: #fff;
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .bus-icon {
+            margin-right: 10px;
         }
     </style>
 </head>
 <body>
     <div class="phone-frame">
-        <a href="location.html">MIET 2030 - 10 asientos disponibles</a>
+        <!-- Bus 1 -->
+        <a href="location.html" class="bus-info">
+            <span class="bus-icon">🚌</span>
+            MIET 2030 - 10 asientos disponibles
+        </a>
         <div class="info">
             <p>- Tiempo de llegada: 5 minutos</p>
             <p>- Disponibilidad asientos: 5</p>
             <p>- Disponibilidad de pie: 10</p>
+        </div>
+
+        <!-- Bus 2 -->
+        <a href="location.html" class="bus-info">
+            <span class="bus-icon">🚌</span>
+            MIET 2040 - 8 asientos disponibles
+        </a>
+        <div class="info">
+            <p>- Tiempo de llegada: 7 minutos</p>
+            <p>- Disponibilidad asientos: 8</p>
+            <p>- Disponibilidad de pie: 12</p>
+        </div>
+
+        <!-- Bus 3 -->
+        <a href="location.html" class="bus-info">
+            <span class="bus-icon">🚌</span>
+            MIET 2050 - 15 asientos disponibles
+        </a>
+        <div class="info">
+            <p>- Tiempo de llegada: 10 minutos</p>
+            <p>- Disponibilidad asientos: 15</p>
+            <p>- Disponibilidad de pie: 15</p>
         </div>
     </div>
 </body>
